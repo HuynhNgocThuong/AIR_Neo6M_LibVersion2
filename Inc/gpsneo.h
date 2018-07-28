@@ -13,58 +13,49 @@
 */
 #ifndef _GPSNEO_H_
 #define _GPSNEO_H_
+
 #include "stm32f1xx_hal.h"
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
-//--------------------------------------Define
+//------------------------------------Define-----------------------------------//
+//-----------------------------------------------------------------------------//
 #define GPS_BUFFER_SIZE 200
-#define GPS_VTG_SIZE 50
 //----------------------------
-/*_______________________________GPS_Struct_____________________________________*/
+//------------------------------------Struct-----------------------------------//
+//-----------------------------------------------------------------------------//
 struct nmeaMessage_t{
 	//Raw Data GPS
-	char GPS_RX_byte[2];
-	char GPS_Transfer_cplt;
 	char GPS_RX_Buffer[GPS_BUFFER_SIZE];
-	char GPS_VTG_Buffer[GPS_VTG_SIZE];
 	uint8_t GPS_Counter;
 	uint8_t GPS_Counter_Tmp;
 	uint8_t GPS_Flag;
-	
-	uint8_t GPS_SCounter;
-	uint8_t GPS_SCounter_Tmp;
-	uint8_t GPS_SFlag;
 };
 struct dataGps_t{
 		//Data GPS
-	char Time[20];
 	char Status[2];
-	char Latitude[9];
+	char Time[20];
+	char Latitude[10];
 	char S_N[2];
-	char Longtitude[10];
+	char Longtitude[11];
 	char E_W[2];
 	char Speed[20];
-	char Dir[20];
 	char Date[20];
+	float Velocity;
 };
 struct statusGps_t{
 	unsigned char GPS_ans_stt;
 	unsigned char GPS_send_error;
 	unsigned char GPS_receive_error;
 };
-struct point_t {
-  double X;       // kinh do
-  double Y;       // vi do
-};
-
 /*________________________________GPS_Prototype_________________________________*/
-int Search_Char(unsigned char Char, char *Str, unsigned char Time, int Len);
-unsigned char GPS_DeviceInfo(char* time, char* status, char* latitude, char* S_N, 
-														 char* longitude, char* E_W, char* speed, char* dir, char* date);
-void CLEAR_GPS_RX_Buffer(void);
-void Processing_$GPGRMC(void);
-void Processing_$GPGVTG(void);
-void Delete_Char(char s[], int pos);
-void GPS_USART_RX_ISR(void);
-#endif /* _PMS7003_H_ */
+ /*____________________________________________________________________________*/
+unsigned char GPS_Data(char* time, char* status, char* latitude, char* S_N, 
+														 char* longitude, char* E_W, char* speed, char* date);
+void GPS_ClearData(void);
+void GPS_ClearRxBuffer(void);
+int  GPS_SearchChar(unsigned char Char, char *Str, unsigned char Time, int Len);
+void GPS_DeleteChar(char s[], int pos);
+void GPS_RawData(void);
+void GPS_Knot2Kmh(char * knot, float * km_h);
+#endif /* _GPSNEO_H_ */

@@ -188,13 +188,10 @@ void StartTask02(void const * argument)
 
 void StartTask03(void const * argument)
 {
-
  for(;;)
   {
-
-		GPS_USART_RX_ISR();
-			}
-
+		GPS_RawData();
+	}
 }
 
 #ifdef __GNUC__
