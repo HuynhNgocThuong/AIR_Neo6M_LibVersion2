@@ -1,4 +1,6 @@
 #include "gpsneo.h"
+extern UART_HandleTypeDef huart1;
+extern UART_HandleTypeDef huart3;
 //------------------------------------Define-----------------------------------//
  //---------------------------------------------------------------------------//
 #define true 1
@@ -6,14 +8,19 @@
 #define bool int
 //-----------------------------------Variable----------------------------------//
  //---------------------------------------------------------------------------//
-extern UART_HandleTypeDef huart1;
-extern UART_HandleTypeDef huart3;
 char ch; 
-//Khai bao struct
+//------------------------------------Struct-----------------------------------//
+//-----------------------------------------------------------------------------//
 struct nmeaMessage_t 	nmeaMessage;
 struct dataGps_t 			dataGps;
 struct statusGps_t		statusGps;
-// Ham xoa ki tu trong chuoi
+
+/**
+  * @brief  Ham xoa 1 ki tru trong chuoi
+	* @param  s[]
+	*         pos: Vi tri can xoa        
+  * @retval Khong
+  */
 void GPS_DeleteChar(char s[], int pos){
 	int n = strlen(s); 
 	for(int i = pos + 1; i < n; i++)
@@ -23,6 +30,7 @@ void GPS_DeleteChar(char s[], int pos){
 	// Ki tu ket thuc
 	s[strlen(s) - 1] = '\0';
 }
+
 /**
   * @brief  Ham tim kiem chuoi ki tu
 	* @param  Char: Ki tu can tim
@@ -42,6 +50,7 @@ int GPS_SearchChar(unsigned char Char, char *Str, unsigned char Time, int Len){
     }
     return i;
 }
+
 /**
   * @brief  Ham xoa bo dem Rx
 	* @param  Khong
@@ -52,6 +61,13 @@ void GPS_ClearRxBuffer(void){
 	for (int j=0; j<GPS_BUFFER_SIZE; j++)
 	nmeaMessage.GPS_RX_Buffer[j] = 0; //clear Rx_Buffer before receiving new data
 	}
+
+/**
+  * @brief  Ham xoa bo dem Data
+	* @param  Khong
+  *                 
+  * @retval Khong
+  */
 void GPS_ClearData(void){
 	for(int j=0; j< strlen(dataGps.Latitude); j++)
 	dataGps.Latitude[j] = 0;					//clear latitude buffer
@@ -60,11 +76,12 @@ void GPS_ClearData(void){
 	for(int j=0; j< strlen(dataGps.Speed); j++)
 	dataGps.Speed[j] = 0;							//clear speed buffer
 }
+
 /**
-  * @brief  Ham xoa bo dem Rx
-	* @param  Khong
+  * @brief  Ham lay data tu raw data
+	* @param  time, status, latitude, sn, longtitude, ew, speed, date
   *                 
-  * @retval Khong
+  * @retval false or true
   */
 unsigned char GPS_Data(char* time, char* status, char* latitude, char* S_N, char* longitude, char* E_W, char* speed, char* date){
   int i = 0;
@@ -118,6 +135,12 @@ unsigned char GPS_Data(char* time, char* status, char* latitude, char* S_N, char
 	}
 }
 
+/**
+  * @brief  Ham raw data (break khi nhan het cau lenh $GPRMC)
+	* @param  Khong
+  *                 
+  * @retval Khong
+  */
 void GPS_RawData(void){
 	while(1){
 		//Khi co du lieu tu Shift register truyen vao Rx buffer thi RXNE flag set
@@ -191,7 +214,13 @@ if (ch == '*'){
 			}
 		}
 	}
-	
+
+/**
+  * @brief  Ham chuyen doi toc do Knot sang Km/h
+	* @param  knot, km_h
+  *                 
+  * @retval Khong
+  */	
 void GPS_Knot2Kmh(char * knot, float * km_h){
     float f_knot;
     f_knot = atof(knot);
