@@ -202,67 +202,52 @@
         <Ww>
           <count>0</count>
           <WinNumber>1</WinNumber>
-          <ItemText>nmeaMessage.GPS_VTG_Buffer</ItemText>
+          <ItemText>nmeaMessage.GPS_RX_Buffer</ItemText>
         </Ww>
         <Ww>
           <count>1</count>
           <WinNumber>1</WinNumber>
-          <ItemText>nmeaMessage.GPS_RX_Buffer</ItemText>
+          <ItemText>nmeaMessage.GPS_Counter,0x0A</ItemText>
         </Ww>
         <Ww>
           <count>2</count>
           <WinNumber>1</WinNumber>
-          <ItemText>nmeaMessage.GPS_Counter,0x0A</ItemText>
+          <ItemText>dataGps.Latitude</ItemText>
         </Ww>
         <Ww>
           <count>3</count>
           <WinNumber>1</WinNumber>
-          <ItemText>nmeaMessage.GPS_SCounter,0x0A</ItemText>
+          <ItemText>dataGps.Longtitude</ItemText>
         </Ww>
         <Ww>
           <count>4</count>
           <WinNumber>1</WinNumber>
-          <ItemText>dataGps.Latitude</ItemText>
+          <ItemText>dataGps.Speed</ItemText>
         </Ww>
         <Ww>
           <count>5</count>
           <WinNumber>1</WinNumber>
-          <ItemText>dataGps.Longtitude</ItemText>
+          <ItemText>nmeaMessage.GPS_Flag,0x0A</ItemText>
         </Ww>
         <Ww>
           <count>6</count>
           <WinNumber>1</WinNumber>
-          <ItemText>dataGps.Speed</ItemText>
+          <ItemText>statusGps.GPS_ans_stt,0x0A</ItemText>
         </Ww>
         <Ww>
           <count>7</count>
           <WinNumber>1</WinNumber>
-          <ItemText>Nmea_Line1,0x0A</ItemText>
+          <ItemText>statusGps.GPS_ans_stt</ItemText>
         </Ww>
         <Ww>
           <count>8</count>
           <WinNumber>1</WinNumber>
-          <ItemText>Nmea_Line2,0x0A</ItemText>
+          <ItemText>dataGps.Latitude[7]</ItemText>
         </Ww>
         <Ww>
           <count>9</count>
           <WinNumber>1</WinNumber>
-          <ItemText>nmeaMessage.GPS_Flag,0x0A</ItemText>
-        </Ww>
-        <Ww>
-          <count>10</count>
-          <WinNumber>1</WinNumber>
-          <ItemText>nmeaMessage.GPS_SFlag,0x0A</ItemText>
-        </Ww>
-        <Ww>
-          <count>11</count>
-          <WinNumber>1</WinNumber>
-          <ItemText>statusGps.GPS_ans_stt,0x0A</ItemText>
-        </Ww>
-        <Ww>
-          <count>12</count>
-          <WinNumber>1</WinNumber>
-          <ItemText>statusGps.GPS_ans_stt</ItemText>
+          <ItemText>dataGps.Latitude[7]</ItemText>
         </Ww>
       </WatchWindow1>
       <Tracepoint>

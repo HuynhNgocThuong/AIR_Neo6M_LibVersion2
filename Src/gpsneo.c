@@ -84,7 +84,6 @@ void GPS_ClearData(void){
   * @retval false or true
   */
 unsigned char GPS_Data(char* time, char* status, char* latitude, char* S_N, char* longitude, char* E_W, char* speed, char* date){
-  int i = 0;
 	int k = 0;
 	int Temp1, Temp2;
 	Temp2 = GPS_SearchChar(',',nmeaMessage.GPS_RX_Buffer,2,GPS_BUFFER_SIZE);	
@@ -94,13 +93,18 @@ unsigned char GPS_Data(char* time, char* status, char* latitude, char* S_N, char
 	else{
 //-------------------------------------------------------------------------------------------------		
     //LATITUDE
-		Temp1 = GPS_SearchChar(',',nmeaMessage.GPS_RX_Buffer,3,GPS_BUFFER_SIZE);	 
+		Temp1 = GPS_SearchChar(',',nmeaMessage.GPS_RX_Buffer,3,GPS_BUFFER_SIZE);
+//		printf("Temp1: %d\r\n",Temp1);
+//		printf("Ki tu Temp1: %c\r\n",nmeaMessage.GPS_RX_Buffer[Temp1]);
 		Temp2 = GPS_SearchChar(',',nmeaMessage.GPS_RX_Buffer,4,GPS_BUFFER_SIZE);	
-		k = 0;
-		for(i = Temp1; i < Temp2-1; i++){
+//		printf("Temp2: %d\r\n",Temp2);
+//		printf("Ki tu Temp2-1: %c\r\n",nmeaMessage.GPS_RX_Buffer[Temp2-1]);
+		for(int i = Temp1; i < Temp2-1; i++){
 			dataGps.Latitude[k++] = nmeaMessage.GPS_RX_Buffer[i];
 		}
-		if(nmeaMessage.GPS_RX_Buffer[Temp2]=='N'){
+//		printf("Ki tu cuoi Lat: %c\r\n",dataGps.Latitude[k-1]);
+		k = 0;
+		if(nmeaMessage.GPS_RX_Buffer[Temp2] == 'N'){
 			dataGps.S_N[0] = 'N';
 		}
 		else{
@@ -110,11 +114,11 @@ unsigned char GPS_Data(char* time, char* status, char* latitude, char* S_N, char
     //LONGTITUDE
 		Temp1 = GPS_SearchChar(',',nmeaMessage.GPS_RX_Buffer,5,GPS_BUFFER_SIZE);	
 		Temp2 = GPS_SearchChar(',',nmeaMessage.GPS_RX_Buffer,6,GPS_BUFFER_SIZE);	
-		k = 0;
-		for(i = Temp1 ; i < Temp2-1; i++){
-			dataGps.Longtitude[k] = nmeaMessage.GPS_RX_Buffer[i];
-			k++;	
+		for(int i = Temp1 ; i < Temp2-1; i++){
+			dataGps.Longtitude[k++] = nmeaMessage.GPS_RX_Buffer[i];
 		}
+//		printf("Ki tu cuoi Long: %c\r\n",dataGps.Longtitude[k-1]);
+		k = 0;
 		if(nmeaMessage.GPS_RX_Buffer[Temp2]=='E'){
 			dataGps.E_W[0] = 'E';
 		}
@@ -125,11 +129,10 @@ unsigned char GPS_Data(char* time, char* status, char* latitude, char* S_N, char
 		//VELOCITY
 		Temp1 = GPS_SearchChar(',',nmeaMessage.GPS_RX_Buffer,7,GPS_BUFFER_SIZE);	 
 		Temp2 = GPS_SearchChar(',',nmeaMessage.GPS_RX_Buffer,8,GPS_BUFFER_SIZE);
-		k = 0;
-		for(i = Temp1; i < Temp2-1; i++){
-			dataGps.Speed[k] = nmeaMessage.GPS_RX_Buffer[i];
-			k++;	
+		for(int i = Temp1; i < Temp2-1; i++){
+			dataGps.Speed[k++] = nmeaMessage.GPS_RX_Buffer[i];
 		}
+		k = 0;
 		GPS_Knot2Kmh(dataGps.Speed, &dataGps.Velocity);
 	return 1;	
 	}
@@ -195,14 +198,15 @@ if (ch == '*'){
 			printf("%s\r\n", nmeaMessage.GPS_RX_Buffer);
 			statusGps.GPS_ans_stt = GPS_Data(dataGps.Time, dataGps.Status, dataGps.Latitude, dataGps.S_N, 
 																				 dataGps.Longtitude, dataGps.E_W, dataGps.Speed, dataGps.Date);
-			if(statusGps.GPS_ans_stt){
-				GPS_ClearRxBuffer();
+			if(statusGps.GPS_ans_stt){	
 				printf("%s\r\n",dataGps.Latitude);
 				printf("%s\r\n",dataGps.S_N);
 				printf("%s\r\n",dataGps.Longtitude);
 				printf("%s\r\n",dataGps.E_W);
 				printf("%s\r\n",dataGps.Speed);
 				printf("%f\r\n",dataGps.Velocity);
+				GPS_ClearRxBuffer();
+			  GPS_ClearData();
 			}
 			else{
 				printf("Not connect yet\r\n");
