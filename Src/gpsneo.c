@@ -1,11 +1,6 @@
 #include "gpsneo.h"
 extern UART_HandleTypeDef huart1;
-extern UART_HandleTypeDef huart3;
-//------------------------------------Define-----------------------------------//
- //---------------------------------------------------------------------------//
-#define true 1
-#define false 0
-#define bool int
+extern UART_HandleTypeDef huart2;
 //-----------------------------------Variable----------------------------------//
  //---------------------------------------------------------------------------//
 char ch; 
@@ -88,7 +83,7 @@ unsigned char GPS_Data(char* time, char* status, char* latitude, char* S_N, char
 	int Temp1, Temp2;
 	Temp2 = GPS_SearchChar(',',nmeaMessage.GPS_RX_Buffer,2,GPS_BUFFER_SIZE);	
 	if(nmeaMessage.GPS_RX_Buffer[Temp2] == 'V'){
-		return 0;
+		return false;
 	}
 	else{
 //-------------------------------------------------------------------------------------------------		
@@ -134,7 +129,7 @@ unsigned char GPS_Data(char* time, char* status, char* latitude, char* S_N, char
 		}
 		k = 0;
 		GPS_Knot2Kmh(dataGps.Speed, &dataGps.Velocity);
-	return 1;	
+	return true;	
 	}
 }
 
@@ -147,8 +142,8 @@ unsigned char GPS_Data(char* time, char* status, char* latitude, char* S_N, char
 void GPS_RawData(void){
 	while(1){
 		//Khi co du lieu tu Shift register truyen vao Rx buffer thi RXNE flag set
-  if(__HAL_UART_GET_FLAG(&huart1, UART_FLAG_RXNE) != RESET){
-		 ch = (uint8_t)((&huart1)->Instance->DR & (uint8_t)0x00FF);
+  if(__HAL_UART_GET_FLAG(&huart2, UART_FLAG_RXNE) != RESET){
+		 ch = (uint8_t)((&huart2)->Instance->DR & (uint8_t)0x00FF);
 	if (ch == '$'){
 		nmeaMessage.GPS_Counter = 1;
 		nmeaMessage.GPS_RX_Buffer[nmeaMessage.GPS_Counter-1] = '$';

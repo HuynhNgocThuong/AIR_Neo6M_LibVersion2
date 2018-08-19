@@ -1,0 +1,24 @@
+--cpu Cortex-M3
+"air_gps_libraryversion2\startup_stm32f103xb.o"
+"air_gps_libraryversion2\stm32f1xx_hal_tim.o"
+"air_gps_libraryversion2\stm32f1xx_hal_gpio.o"
+"air_gps_libraryversion2\stm32f1xx_hal_tim_ex.o"
+"air_gps_libraryversion2\stm32f1xx_hal_dma.o"
+"air_gps_libraryversion2\stm32f1xx_hal_pwr.o"
+"air_gps_libraryversion2\stm32f1xx_hal_gpio_ex.o"
+"air_gps_libraryversion2\stm32f1xx_hal_flash_ex.o"
+"air_gps_libraryversion2\stm32f1xx_hal.o"
+"air_gps_libraryversion2\stm32f1xx_hal_cortex.o"
+"air_gps_libraryversion2\stm32f1xx_hal_uart.o"
+"air_gps_libraryversion2\stm32f1xx_hal_rcc_ex.o"
+"air_gps_libraryversion2\stm32f1xx_hal_flash.o"
+"air_gps_libraryversion2\stm32f1xx_hal_rcc.o"
+"air_gps_libraryversion2\stm32f1xx_it.o"
+"air_gps_libraryversion2\main.o"
+"air_gps_libraryversion2\stm32f1xx_hal_msp.o"
+"air_gps_libraryversion2\gpsneo.o"
+"air_gps_libraryversion2\system_stm32f1xx.o"
+--library_type=microlib --strict --scatter "AIR_GPS_LibraryVersion2\AIR_GPS_LibraryVersion2.sct"
+--summary_stderr --info summarysizes --map --xref --callgraph --symbols
+--info sizes --info totals --info unused --info veneers
+--list "AIR_GPS_LibraryVersion2.map" -o AIR_GPS_LibraryVersion2\AIR_GPS_LibraryVersion2.axf

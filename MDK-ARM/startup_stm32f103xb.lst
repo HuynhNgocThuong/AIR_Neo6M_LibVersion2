@@ -4,12 +4,12 @@
 ARM Macro Assembler    Page 1 
 
 
-    1 00000000         ;******************** (C) COPYRIGHT 2015 STMicroelectron
+    1 00000000         ;******************** (C) COPYRIGHT 2017 STMicroelectron
                        ics ********************
     2 00000000         ;* File Name          : startup_stm32f103xb.s
     3 00000000         ;* Author             : MCD Application Team
-    4 00000000         ;* Version            : V4.0.2
-    5 00000000         ;* Date               : 18-December-2015
+    4 00000000         ;* Version            : V4.2.0
+    5 00000000         ;* Date               : 31-March-2017
     6 00000000         ;* Description        : STM32F103xB Devices vector table
                         for MDK-ARM toolchain. 
     7 00000000         ;*                      This module performs:
@@ -29,7 +29,8 @@ ARM Macro Assembler    Page 1
    16 00000000         ;*******************************************************
                        *************************
    17 00000000         ;*
-   18 00000000         ;* COPYRIGHT(c) 2015 STMicroelectronics
+   18 00000000         ;* <h2><center>&copy; COPYRIGHT(c) 2017 STMicroelectroni
+                       cs</center></h2>
    19 00000000         ;*
    20 00000000         ;* Redistribution and use in source and binary forms, wi
                        th or without modification,
@@ -62,13 +63,13 @@ ARM Macro Assembler    Page 1
    35 00000000         ;* FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPL
                        ARY, OR CONSEQUENTIAL
    36 00000000         ;* DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT O
-                       F SUBSTITUTE GOODS OR
 
 
 
 ARM Macro Assembler    Page 2 
 
 
+                       F SUBSTITUTE GOODS OR
    37 00000000         ;* SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS 
                        INTERRUPTION) HOWEVER
    38 00000000         ;* CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CON
@@ -127,13 +128,13 @@ ARM Macro Assembler    Page 2
                        __Vectors
                                DCD              __initial_sp ; Top of Stack
    79 00000004 00000000        DCD              Reset_Handler ; Reset Handler
-   80 00000008 00000000        DCD              NMI_Handler ; NMI Handler
 
 
 
 ARM Macro Assembler    Page 3 
 
 
+   80 00000008 00000000        DCD              NMI_Handler ; NMI Handler
    81 0000000C 00000000        DCD              HardFault_Handler ; Hard Fault 
                                                             Handler
    82 00000010 00000000        DCD              MemManage_Handler 
@@ -192,13 +193,13 @@ ARM Macro Assembler    Page 3
   116 00000090 00000000        DCD              USB_LP_CAN1_RX0_IRQHandler ; US
                                                             B Low  Priority or 
                                                             CAN1 RX0
-  117 00000094 00000000        DCD              CAN1_RX1_IRQHandler ; CAN1 RX1
 
 
 
 ARM Macro Assembler    Page 4 
 
 
+  117 00000094 00000000        DCD              CAN1_RX1_IRQHandler ; CAN1 RX1
   118 00000098 00000000        DCD              CAN1_SCE_IRQHandler ; CAN1 SCE
   119 0000009C 00000000        DCD              EXTI9_5_IRQHandler 
                                                             ; EXTI Line 9..5
@@ -257,13 +258,13 @@ ARM Macro Assembler    Page 4
   155 00000008         
   156 00000008         ; Dummy Exception Handlers (infinite loops which can be 
                        modified)
-  157 00000008         
 
 
 
 ARM Macro Assembler    Page 5 
 
 
+  157 00000008         
   158 00000008         NMI_Handler
                                PROC
   159 00000008                 EXPORT           NMI_Handler                [WEA
@@ -322,13 +323,13 @@ K]
   200 0000001A         Default_Handler
                                PROC
   201 0000001A         
-  202 0000001A                 EXPORT           WWDG_IRQHandler            [WEA
 
 
 
 ARM Macro Assembler    Page 6 
 
 
+  202 0000001A                 EXPORT           WWDG_IRQHandler            [WEA
 K]
   203 0000001A                 EXPORT           PVD_IRQHandler             [WEA
 K]
@@ -387,13 +388,13 @@ K]
   230 0000001A                 EXPORT           TIM2_IRQHandler            [WEA
 K]
   231 0000001A                 EXPORT           TIM3_IRQHandler            [WEA
-K]
 
 
 
 ARM Macro Assembler    Page 7 
 
 
+K]
   232 0000001A                 EXPORT           TIM4_IRQHandler            [WEA
 K]
   233 0000001A                 EXPORT           I2C1_EV_IRQHandler         [WEA
@@ -452,13 +453,13 @@ K]
   274 0000001A         TIM2_IRQHandler
   275 0000001A         TIM3_IRQHandler
   276 0000001A         TIM4_IRQHandler
-  277 0000001A         I2C1_EV_IRQHandler
 
 
 
 ARM Macro Assembler    Page 8 
 
 
+  277 0000001A         I2C1_EV_IRQHandler
   278 0000001A         I2C1_ER_IRQHandler
   279 0000001A         I2C2_EV_IRQHandler
   280 0000001A         I2C2_ER_IRQHandler
@@ -495,12 +496,12 @@ ARM Macro Assembler    Page 8
               00000000 
               00000000 
 Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M3 --apcs=interw
-ork --depend=rtos\startup_stm32f103xb.d -ortos\startup_stm32f103xb.o -I..\Inc -
-I"C:\Users\Thuong\Documents\Keil C5\Air_V2\AIR_GPS_LibV2\RTOS\MDK-ARM\RTE" -IC:
-\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include -IC:\Keil_v5\ARM\PACK\Keil\STM3
-2F1xx_DFP\2.2.0\Device\Include --predefine="__MICROLIB SETA 1" --predefine="__U
-VISION_VERSION SETA 517" --predefine="_RTE_ SETA 1" --predefine="STM32F10X_MD S
-ETA 1" --list=startup_stm32f103xb.lst startup_stm32f103xb.s
+ork --depend=air_gps_libraryversion2\startup_stm32f103xb.d -oair_gps_libraryver
+sion2\startup_stm32f103xb.o -IC:\Users\Thuong\Desktop\AIR_GPS_LibraryVersion2\M
+DK-ARM\RTE -IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include -IC:\Keil_v5\ARM
+\PACK\Keil\STM32F1xx_DFP\2.2.0\Device\Include --predefine="__MICROLIB SETA 1" -
+-predefine="__UVISION_VERSION SETA 517" --predefine="_RTE_ SETA 1" --predefine=
+"STM32F10X_MD SETA 1" --list=startup_stm32f103xb.lst startup_stm32f103xb.s
 
 
 
